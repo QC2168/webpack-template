@@ -1,9 +1,13 @@
 import * as path from 'path';
-import * as webpack from 'webpack';
+import { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 
-const config: webpack.Configuration = {
+interface Configuration extends WebpackConfiguration {
+  devServer ?: WebpackDevServerConfiguration;
+}
+const config: Configuration = {
   mode: 'production',
   entry: {
     main: './src/main.ts',
@@ -14,6 +18,10 @@ const config: webpack.Configuration = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name]/[name].js',
     clean: true,
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    port: 8088,
   },
   module: {
     rules: [

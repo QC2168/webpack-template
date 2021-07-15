@@ -18,5 +18,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'no-console': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
 };
