@@ -8,7 +8,7 @@ interface Configuration extends WebpackConfiguration {
   devServer ?: WebpackDevServerConfiguration;
 }
 const config: Configuration = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     main: './src/main.ts',
     index: './src/pages/index/index.ts', // index页面
@@ -16,12 +16,13 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name]/[name].js',
+    filename: 'js/[name]/[name]-[hash].js',
     clean: true,
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 8088,
+    stats: 'errors-only',
   },
   module: {
     rules: [
