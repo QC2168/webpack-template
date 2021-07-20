@@ -16,7 +16,7 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name]/[name]-[hash].js',
+    filename: 'js/[name]/[name].[contenthash].js',
     clean: true,
   },
   devServer: {
