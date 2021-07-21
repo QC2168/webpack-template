@@ -20,6 +20,8 @@ const config: Configuration = {
     clean: true,
   },
   devServer: {
+    host: '0.0.0.0',
+    useLocalIp: true,
     contentBase: path.join(__dirname, 'dist'),
     port: 8088,
     stats: 'errors-only',
