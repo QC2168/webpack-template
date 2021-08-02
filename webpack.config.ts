@@ -57,6 +57,14 @@ const config: Configuration = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        // 处理html文件中的img图片（负责引入img，从而能被url-loader进行处理）
+        test: /\.html$/,
+        loader: 'html-loader',
+        options: {
+          esModule: false,
+        },
+      },
     ],
   },
   resolve: {
