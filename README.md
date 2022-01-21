@@ -1,5 +1,5 @@
 ### 什么是webpack-template
-`webpack-template`是一个集成了多种常用的工具库的webpack模板，开箱即用
+`webpack-template`是一个集成了多种常用的工具库的webpack模板，开箱即用。
 ### 模板目录结构
 ```
 webpack-template                    
@@ -26,12 +26,15 @@ webpack-template
 ├─ README.md  说明文件                      
 ├─ tsconfig.json  ts配置文件                   
 └─ webpack.config.ts  webpack配置文件              
-
 ```
 
 ### 运行项目
 1、安装项目依赖
-> pnpm i
+```
+pnpm i
+```
 
 2、运行项目
-> pnpm run serve
+```
+pnpm run serve
+```

@@ -7,7 +7,8 @@
     "build": "webpack",
     "lint": "eslint --fix --ext .js,.ts src",
     "serve": "webpack serve --open",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm"
   },
   "lint-staged": {
     "*.{vue,js,ts}": "eslint --fix"
@@ -41,6 +42,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "glob": "^7.2.0"
   }
 }

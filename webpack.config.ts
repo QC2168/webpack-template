@@ -1,19 +1,16 @@
 import * as path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
+import { getHtmlWebpackPlugin, getEntry } from './src/uilts';
 
 interface Configuration extends WebpackConfiguration {
-  devServer ?: WebpackDevServerConfiguration;
+  devServer?: WebpackDevServerConfiguration;
 }
+
 const config: Configuration = {
   mode: 'development',
-  entry: {
-    main: './src/main.ts',
-    index: './src/pages/index/index.ts', // index页面
-    hello: './src/pages/hello/hello.ts', // hello页面
-  },
+  entry: getEntry('./src/pages/**/*.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name]/[name].[contenthash].js',
@@ -69,18 +66,7 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'index',
-      filename: 'index.html',
-      template: './src/pages/index/index.html',
-      chunks: ['index', 'main'],
-    }),
-    new HtmlWebpackPlugin({
-      title: 'hello',
-      filename: 'hello.html',
-      template: './src/pages/hello/hello.html',
-      chunks: ['hello', 'main'],
-    }),
+    ...getHtmlWebpackPlugin('./src/pages/**/*.html'),
     new ESLintPlugin({
       extensions: ['js', 'ts'],
       exclude: '/node_modules/',
