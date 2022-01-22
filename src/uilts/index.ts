@@ -8,7 +8,7 @@ interface entryObj {
 
 export function getEntry(globPath: string): entryObj {
   const entries: entryObj = { main: './src/main.ts' };
-  Glob.sync(globPath).forEach((entry:string) => {
+  Glob.sync(`${globPath}.ts`).forEach((entry: string) => {
     const basename: string = path.basename(entry, path.extname(entry));
     const pathname: string = path.dirname(entry);
     entries[basename] = `${pathname}/${basename}`;
@@ -18,7 +18,7 @@ export function getEntry(globPath: string): entryObj {
 
 export function getHtmlWebpackPlugin(globPath: string): HtmlWebpackPlugin[] {
   const htmlPlugins: HtmlWebpackPlugin[] = [];
-  Glob.sync(globPath).forEach((entry:string) => {
+  Glob.sync(`${globPath}.html`).forEach((entry: string) => {
     const basename: string = path.basename(entry, path.extname(entry));
     const pathname: string = path.dirname(entry);
     htmlPlugins.push(new HtmlWebpackPlugin({
@@ -30,4 +30,13 @@ export function getHtmlWebpackPlugin(globPath: string): HtmlWebpackPlugin[] {
     }));
   });
   return htmlPlugins;
+}
+
+export function getPages(pagePath: string): any {
+  const entries: entryObj = getEntry(pagePath);
+  const htmlPlugins: HtmlWebpackPlugin[] = getHtmlWebpackPlugin(pagePath);
+  return {
+    entries,
+    htmlPlugins,
+  };
 }

@@ -2,7 +2,9 @@ import * as path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import ESLintPlugin from 'eslint-webpack-plugin';
-import { getHtmlWebpackPlugin, getEntry } from './src/uilts';
+import { getPages } from './src/uilts';
+
+const { entrys, htmlPlugins } = getPages('./src/pages/**/*');
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -10,7 +12,7 @@ interface Configuration extends WebpackConfiguration {
 
 const config: Configuration = {
   mode: 'development',
-  entry: getEntry('./src/pages/**/*.ts'),
+  entry: entrys,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name]/[name].[contenthash].js',
@@ -66,7 +68,7 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
-    ...getHtmlWebpackPlugin('./src/pages/**/*.html'),
+    ...htmlPlugins,
     new ESLintPlugin({
       extensions: ['js', 'ts'],
       exclude: '/node_modules/',
